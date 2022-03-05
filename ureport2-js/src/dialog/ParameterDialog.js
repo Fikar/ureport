@@ -104,6 +104,7 @@ export default class ParameterDialog{
             this.editData=data;
             this.nameEditor.val(data.name);
             this.typeEditor.val(data.type);
+            this.listTypeEditor.val(data.listType);
             this.defaultValueEditor.val(data.defaultValue);
         }
     }

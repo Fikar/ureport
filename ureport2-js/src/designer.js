@@ -94,7 +94,7 @@ export default class UReportDesigner{
             e.preventDefault();
         });
         const tabContent=$(`<div class="tab-content" style="min-height: 300px"/>`);
-        const propContainer=$(`<div id="${propContainerId}" class="tab-pane fade in active"></div>`);
+        const propContainer=$(`<div id="${propContainerId}" class="tab-pane fade in active" style="overflow: auto;height: 500px;"></div>`);
         const dsContainer=$(`<div id="${dsContainerId}" class="tab-pane fade"></div>`);
         tabContent.append(propContainer);
         tabContent.append(dsContainer);
