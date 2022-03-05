@@ -107,6 +107,8 @@ public class DatasourceParser implements Parser<DatasourceDefinition> {
 			param.setName(ele.attributeValue("name"));
 			param.setDefaultValue(ele.attributeValue("default-value"));
 			param.setType(DataType.valueOf(ele.attributeValue("type")));
+			String listType = ele.attributeValue("listType");
+			param.setListType(listType == null ? DataType.String : DataType.valueOf(listType));
 			parameters.add(param);
 		}
 		return parameters;

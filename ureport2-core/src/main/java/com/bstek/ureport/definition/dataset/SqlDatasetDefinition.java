@@ -96,11 +96,12 @@ public class SqlDatasetDefinition implements DatasetDefinition {
 		for(Parameter param:parameters){
 			String name=param.getName();
 			DataType datatype=param.getType();
+			DataType listDataType=param.getListType();
 			Object value=param.getDefaultValue();
 			if(params!=null && params.containsKey(name)){
 				value=params.get(name);
 			}
-			map.put(name, datatype.parse(value));
+			map.put(name, datatype.parse(listDataType, value));
 		}
 		return map;
 	}

@@ -24,6 +24,7 @@ import com.bstek.ureport.definition.datasource.DataType;
 public class Parameter {
 	private String name;
 	private DataType type;
+	private DataType listType;
 	private String defaultValue;
 	public String getName() {
 		return name;
@@ -37,6 +38,8 @@ public class Parameter {
 	public void setType(DataType type) {
 		this.type = type;
 	}
+	public DataType getListType() { return listType; }
+	public void setListType(DataType listType) { this.listType = listType; }
 	public String getDefaultValue() {
 		return defaultValue;
 	}

@@ -345,29 +345,52 @@ public class DatasourceServletAction extends RenderPageServletAction {
 		for(Map<String,Object> param:list){
 			String name=param.get("name").toString();
 			DataType type=DataType.valueOf(param.get("type").toString());
+			DataType listType=DataType.valueOf(param.get("listType").toString());
 			String defaultValue=(String)param.get("defaultValue");
 			if(defaultValue==null || defaultValue.equals("")){
 				switch(type){
 				case Boolean:
 					map.put(name, false);
+					break;
 				case Date:
 					map.put(name, new Date());
+					break;
 				case Float:
-					map.put(name, new Float(0));
+					map.put(name, (float) 0);
+					break;
 				case Integer:
 					map.put(name, 0);
+					break;
 				case String:
 					if(defaultValue!=null && defaultValue.equals("")){
-						map.put(name, "");						
+						map.put(name, "");
 					}else{
-						map.put(name, "null");						
+						map.put(name, "null");
 					}
 					break;
 				case List:
-					map.put(name, new ArrayList<Object>());
-				}				
+					switch (listType){
+						case Boolean:
+							map.put(name, new ArrayList<Boolean>() {{add(false);}});
+							break;
+						case Date:
+							map.put(name, new ArrayList<Date>() {{add(new Date());}});
+							break;
+						case Float:
+							map.put(name, new ArrayList<Float>() {{add((float) 0);}});
+							break;
+						case Integer:
+							map.put(name, new ArrayList<Integer>() {{add(0);}});
+							break;
+						case String:
+							map.put(name, new ArrayList<String>() {{add("");}});
+							break;
+						default:
+							map.put(name, new ArrayList<Object>() {{add(null);}});
+					}
+				}
 			}else{
-				map.put(name, type.parse(defaultValue));			
+				map.put(name, type.parse(listType, defaultValue));
 			}
 		}
 		return map;

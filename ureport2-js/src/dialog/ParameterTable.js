@@ -11,7 +11,7 @@ export default class ParameterTable{
         const _this=this;
         const table=$(`<table class="table table-bordered" style="margin-bottom: 0">
             <thead>
-                <tr style="background: #f4f4f4;height: 30px;"><td style="vertical-align: middle">${window.i18n.dialog.paramTable.paramName}</td><td style="vertical-align: middle">${window.i18n.dialog.paramTable.paramDatatype}</td><td style="vertical-align: middle">${window.i18n.dialog.paramTable.defaultValue}</td><td style="vertical-align: middle;width: 80px;">${window.i18n.dialog.paramTable.operator}</td></tr>
+                <tr style="background: #f4f4f4;height: 30px;"><td style="vertical-align: middle">${window.i18n.dialog.paramTable.paramName}</td><td style="vertical-align: middle">${window.i18n.dialog.paramTable.paramDatatype}</td><td style="vertical-align: middle">${window.i18n.dialog.paramTable.paramListDatatype}</td><td style="vertical-align: middle">${window.i18n.dialog.paramTable.defaultValue}</td><td style="vertical-align: middle;width: 80px;">${window.i18n.dialog.paramTable.operator}</td></tr>
             </thead>
         </table>`);
         this.body=$(`<tbody></tbody>`);
@@ -20,15 +20,17 @@ export default class ParameterTable{
         container.append(table);
         this.parameterDialog=new ParameterDialog(this.data);
         addButton.click(function(){
-            _this.parameterDialog.show(function(name,type,defaultValue){
-                const obj={name,type,defaultValue};
+            _this.parameterDialog.show(function(name,type,defaultValue,listType){
+                const obj={name,type,defaultValue,listType};
                 _this.data.push(obj);
                 const newTr=$(`<tr style="height: 35px;"></tr>`);
                 const nameTd=$(`<td style="vertical-align: middle">${name}</td>`);
                 const typeTd=$(`<td style="vertical-align: middle">${type}</td>`);
+                const listTypeTd=$(`<td style="vertical-align: middle">${listType}</td>`);
                 const defaultValueTd=$(`<td style="vertical-align: middle">${defaultValue}</td>`);
                 newTr.append(nameTd);
                 newTr.append(typeTd);
+                newTr.append(listTypeTd);
                 newTr.append(defaultValueTd);
                 const opTd=$(`<td style="vertical-align: middle"></td>`);
                 const removeSpan=$(`<span><a href="###"><i class="glyphicon glyphicon-trash" title="${window.i18n.dialog.paramTable.delParam}" style="font-size: 12pt;color: #d30a16;"></a></span>`);
@@ -43,12 +45,14 @@ export default class ParameterTable{
                 const editSpan=$(`<span><a href="###"><i class="glyphicon glyphicon-edit" title="${window.i18n.dialog.paramTable.editParam}" style="font-size: 12pt;color: #005fd3;margin-left: 10px"></a></span>`);
                 opTd.append(editSpan);
                 editSpan.click(function(){
-                    _this.parameterDialog.show(function(name,type,defaultValue){
+                    _this.parameterDialog.show(function(name,type,defaultValue,listType){
                         obj.name=name;
                         obj.type=type;
+                        obj.listType=listType;
                         obj.defaultValue=defaultValue;
                         nameTd.html(name);
                         typeTd.html(type);
+                        listTypeTd.html(listType);
                         defaultValueTd.html(defaultValue);
                     },obj);
                 });
@@ -66,9 +70,11 @@ export default class ParameterTable{
             const tr=$(`<tr style="height: 35px;"></tr>`);
             const nameTd=$(`<td style="vertical-align: middle">${param.name}</td>`);
             const typeTd=$(`<td style="vertical-align: middle">${param.type}</td>`);
+            const listTypeTd=$(`<td style="vertical-align: middle">${param.listType}</td>`);
             const defaultValueTd=$(`<td style="vertical-align: middle">${param.defaultValue}</td>`);
             tr.append(nameTd);
             tr.append(typeTd);
+            tr.append(listTypeTd);
             tr.append(defaultValueTd);
 
             const opTd=$(`<td style="vertical-align: middle"></td>`);
@@ -85,12 +91,14 @@ export default class ParameterTable{
             const editSpan=$(`<span><a href="###"><i class="glyphicon glyphicon-edit" title="${window.i18n.dialog.paramTable.editParam}" style="font-size: 12pt;color: #005fd3;margin-left: 10px"></a></span>`);
             opTd.append(editSpan);
             editSpan.click(function(){
-                _this.parameterDialog.show(function(name,type,defaultValue){
+                _this.parameterDialog.show(function(name,type,defaultValue,listType){
                     param.name=name;
                     param.type=type;
+                    param.listType=listType;
                     param.defaultValue=defaultValue;
                     nameTd.html(name);
                     typeTd.html(type);
+                    listTypeTd.html(listType);
                     defaultValueTd.html(defaultValue);
                 },param);
             });

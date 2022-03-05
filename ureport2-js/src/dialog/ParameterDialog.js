@@ -47,6 +47,19 @@ export default class ParameterDialog{
         typeRow.append(typeGroup);
         body.append(typeRow);
 
+        const listTypeRow=$(`<div class="row" style="margin-bottom: 10px;margin-right:6px;"><div class="col-md-3" style="padding: 0 10px 0 0px;text-align:right;margin-top:5px">${window.i18n.dialog.sqlParam.listDatatype}</div></div>`);
+        const listTypeGroup=$(`<div class="col-md-9" style="padding: 0 10px 0 0px"></div>`);
+        this.listTypeEditor=$(`<select class="form-control">
+            <option>String</option>
+            <option>Integer</option>
+            <option>Float</option>
+            <option>Boolean</option>
+            <option>Date</option>
+        </select>`);
+        listTypeGroup.append(this.listTypeEditor);
+        listTypeRow.append(listTypeGroup);
+        body.append(listTypeRow);
+
         const defaultValueRow=$(`<div class="row" style="margin-bottom: 10px;margin-right:6px;"><div class="col-md-3" style="padding: 0 10px 0 0px;text-align:right;margin-top:5px">${window.i18n.dialog.sqlParam.defaultValue}</div></div>`);
         const defaultValueGroup=$(`<div class="col-md-9" style="padding: 0 10px 0 0px"></div>`);
         this.defaultValueEditor=$(`<input type="text" placeholder="${window.i18n.dialog.sqlParam.tip}" class="form-control">`);
@@ -59,12 +72,17 @@ export default class ParameterDialog{
         footer.append(addButton);
         addButton.click(function(){
             const name=_this.nameEditor.val(),type=_this.typeEditor.val(),defaultValue=_this.defaultValueEditor.val();
+            const listType=_this.listTypeEditor.val();
             if(name===''){
                 alert(`${window.i18n.dialog.sqlParam.nameTip}`);
                 return;
             }
             if(type===''){
                 alert(`${window.i18n.dialog.sqlParam.datatypeTip}`);
+                return;
+            }
+            if(type==='List' && listType===''){
+                alert(`${window.i18n.dialog.sqlParam.listDatatypeTip}`);
                 return;
             }
             if(!_this.editData || name!==_this.editData.name){
@@ -75,7 +93,7 @@ export default class ParameterDialog{
                     }
                 }
             }
-            _this.onSave.call(this,name,type,defaultValue);
+            _this.onSave.call(this,name,type,defaultValue,listType);
             _this.dialog.modal('hide');
         });
     }

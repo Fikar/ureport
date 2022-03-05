@@ -1,0 +1,5 @@
+/.idea/
+**/target/
+**/*.iml
+/ureport2-js/node_modules
+/ureport2-js/package-lock.json

@@ -49,8 +49,13 @@ export default class PreviewTool extends Tool{
             type:'POST',
             data:{content},
             success:function(){
-                let newWindow=window.open(targetUrl,"_blank");
-                newWindow.focus();
+                // liangwei, call zk script
+                if (parent.preview != undefined)
+                    parent.preview(withPaging);
+                else {
+                    let newWindow=window.open(targetUrl,"_blank");
+                    newWindow.focus();
+                }
             },
             error:function(){
                 alert(`${window.i18n.tools.preview.previewFail}`);

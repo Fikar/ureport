@@ -193,7 +193,7 @@ public class HtmlProducer{
 					}
 					String target=cell.getLinkTargetWindow();
 					if(StringUtils.isBlank(target))target="_self";
-					sb.append("<a href=\""+linkURL+"\" target=\""+target+"\">");
+					sb.append("<a href=\""+linkURL+"\" target=\""+target+"\" onclick=\"if(parent.jumpLink!=undefined){parent.jumpLink({'linkURL':'"+linkURL+"','target':'"+target+"'});return false;}\">");
 				}
 				Object obj=(cell.getFormatData()== null) ? "" : cell.getFormatData();
 				if(obj instanceof Image){

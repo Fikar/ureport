@@ -30,7 +30,7 @@ import com.bstek.ureport.exception.ReportComputeException;
  */
 public enum DataType {
 	Integer,Float,Boolean,String,Date,List;
-	public Object parse(Object obj){
+	public Object parse(DataType listType, Object obj){
 		if(obj==null)return null;
 		switch(this){
 		case Boolean:
@@ -68,15 +68,21 @@ public enum DataType {
 			}
 		case List:
 			if(obj.toString().equals("")){
-				return null;
+//				return null;
+				return new ArrayList<Object>() {{add(null);}};
 			}
 			if(obj instanceof List){
 				return (List<?>)obj;
 			}else{
+//				String[] arrs=obj.toString().split(",");
+//				List<String> list=new ArrayList<String>();
+//				for(int i=0;i<arrs.length;i++){
+//					list.add(arrs[i]);
+//				}
 				String[] arrs=obj.toString().split(",");
-				List<String> list=new ArrayList<String>();
+				List<Object> list=new ArrayList<>();
 				for(int i=0;i<arrs.length;i++){
-					list.add(arrs[i]);
+					list.add(listType.parse(listType, arrs[i]));
 				}
 				return list;
 			}

@@ -478,7 +478,7 @@ export function tableToXml(context){
                     ds+=`<field name="${field.name}"/>`;
                 }
                 for(let parameter of dataset.parameters){
-                    ds+=`<parameter name="${encode(parameter.name)}" type="${parameter.type}" default-value="${encode(parameter.defaultValue)}"/>`;
+                    ds+=`<parameter name="${encode(parameter.name)}" type="${parameter.type}" listType="${parameter.listType}" default-value="${encode(parameter.defaultValue)}"/>`;
                 }
                 ds+=`</dataset>`;
             }
@@ -500,7 +500,7 @@ export function tableToXml(context){
                     ds+=`<field name="${field.name}"/>`;
                 }
                 for(let parameter of dataset.parameters){
-                    ds+=`<parameter name="${parameter.name}" type="${parameter.type}" default-value="${parameter.defaultValue}"/>`;
+                    ds+=`<parameter name="${parameter.name}" type="${parameter.type}" listType="${parameter.listType}" default-value="${parameter.defaultValue}"/>`;
                 }
                 ds+=`</dataset>`;
             }

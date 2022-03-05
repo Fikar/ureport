@@ -37,7 +37,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  */
 public class UReportServlet extends HttpServlet {
 	private static final long serialVersionUID = 533049461276487971L;
-	public static final String URL = "/ureport";
+	public static final String URL = "";
 	private Map<String, ServletAction> actionMap = new HashMap<String, ServletAction>();
 
 	@Override
