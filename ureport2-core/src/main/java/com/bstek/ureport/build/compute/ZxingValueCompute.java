@@ -119,6 +119,8 @@ public class ZxingValueCompute implements ValueCompute {
 	
 	private Image buildImage(BarcodeFormat format,String data,int w,int h){
         try{
+        	// 去除所有制表符,以及首尾空格
+        	data = data.replaceAll("\t", "").strip();
         	Map<EncodeHintType, Object> hints = new Hashtable<EncodeHintType, Object>();  
             hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
             hints.put(EncodeHintType.MARGIN,0);
