@@ -50,8 +50,8 @@ export default class PreviewTool extends Tool{
             data:{content},
             success:function(){
                 // liangwei, call zk script
-                if (parent.preview != undefined)
-                    parent.preview(withPaging);
+                if (parent.uReportPreview != undefined)
+                    parent.uReportPreview(withPaging, frameElement.name);
                 else {
                     let newWindow=window.open(targetUrl,"_blank");
                     newWindow.focus();

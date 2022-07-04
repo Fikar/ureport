@@ -100,6 +100,9 @@ export default class ReportTable{
     }
 
     loadFile(file,callback){
+        if (parent.uReportLoadFile != undefined && file !== 'classpath:template/template.ureport.xml') {
+            parent.uReportLoadFile(file, frameElement.name);
+        }
         const _this=this;
         const url=window._server+"/designer/loadReport";
         $.ajax({
